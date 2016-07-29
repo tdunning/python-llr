@@ -42,6 +42,7 @@ def flatten(list_of_lists):
 
 def rowSums(k):
     '''Combines a list of counters into a summed counter'''
+    return reduce(lambda x, y: x + y, k, Counter()).values()
 
 def colSums(k):
     '''Computes a list of total counts from a list of Count objects'''

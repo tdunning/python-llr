@@ -18,13 +18,19 @@ def test_root():
     assert llr.llr_root(0,1,1,0) == -math.sqrt(llr.llr([Counter('a'), Counter('b')]))
 
 def test_rowSums():
-    x = Counter('abcabcabcababa')
-    y = Counter('abcabcdef')
-    assert llr.rowSums([x,y]) == Counter('abcabcabcababaabcabcdef').values()
+    s1 = 'abcabcabcababa'
+    s2 = 'abcabcdef'
+    s3 = 'defghijkabc'
+    assert llr.rowSums([]) == Counter().values()
+    assert llr.rowSums([Counter(s1)]) == Counter(s1).values()
+    assert llr.rowSums([Counter(s1), Counter(s2)]) == Counter(s1 + s2).values()
+    assert llr.rowSums([Counter(s1), Counter(s2), Counter(s3)]) == Counter(s1 + s2 + s3).values()
 
 def test_colSums():
     x = Counter('abcabcabcababa')
     y = Counter('abcabcdef')
+    assert llr.colSums([]) == []
+    assert llr.colSums([x]) == [14]
     assert llr.colSums([x,y]) == [14, 9]
 
 def test_entropy():

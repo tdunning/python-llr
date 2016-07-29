@@ -21,11 +21,11 @@ key for the counts as the other condition.
 `llr_compare(k1, k2)` - Compares the two `Counter` object, entry by
 entry, by doing a 2x2 test on each key in either `k1` or `k2`. The
 result is a dictionary with the same keys and values computed using
-llr_2x2. The results for a particular key will be positive if that key
+`llr_root`. The results for a particular key will be positive if that key
 is more common in `k1` and negative if the key is more common in
 `k2`. As an example, we can find words that are interestingly more
 common in Hamlet than in the Declaration of Independence using this
-function. The file `example01.py` has a complete program to do
+function. The file `example-01.py` has a complete program to do
 this. The beginning is just reading files and counting the words:
 
     def count(file):
@@ -102,3 +102,24 @@ code. It goes like this:
     tests.py::test_entropy PASSED
     
     ========================== 6 passed in 0.04 seconds ===========================
+
+You can also install the pytest coverage tool to find out that the
+tests are comprehensive in terms of lines of code:
+
+    $ sudo pip install pytest-cov
+    $ py.test --cov=llr tests.py
+    ======================================= test session starts ========================================
+    platform darwin -- Python 2.7.10, pytest-2.9.2, py-1.4.31, pluggy-0.3.1
+    rootdir: /Users/tdunning/Apache/python-llr, inifile:
+    plugins: cov-2.3.0
+    collected 6 items
+
+    tests.py ......
+
+    ---------- coverage: platform darwin, python 2.7.10-final-0 ----------
+    Name     Stmts   Miss  Cover
+    ----------------------------
+    llr.py      37      0   100%
+
+
+    ===================================== 6 passed in 0.02 seconds =====================================
