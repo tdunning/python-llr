@@ -28,18 +28,20 @@ def llr_2x2(k11, k12, k21, k22):
                 denormEntropy([k11, k12, k21, k22]))
 
 def llr_root(k11, k12, k21, k22):
+    '''Computes a score for a 2x2 contingency table, but then adds a sign according to whether k11 is larger (result is positive) or smaller (result is negative) than might be expected. The magnitude of the result can be roughly interpreted on a scale similar to standard deviations'''
     row = k11 + k21
     total = (k11 + k12 + k21 + k22)
     sign = cmp(float(k11) / (k11 + k12), float(row) / total)
     return math.copysign(math.sqrt(llr_2x2(k11, k12, k21, k22)), sign)
 
 def flatten(list_of_lists):
+    '''Iterates through the elements in a list of lists'''
     for xl in list_of_lists:
         for x in xl:
             yield x
 
 def rowSums(k):
-    return reduce(lambda x, y: x + y, k).values()
+    '''Combines a list of counters into a summed counter'''
 
 def colSums(k):
     '''Computes a list of total counts from a list of Count objects'''
@@ -49,5 +51,6 @@ def denormEntropy(counts):
     '''Computes the entropy of a list of counts scaled by the sum of the counts. If the inputs sum to one, this is just the normal definition of entropy'''
     counts = list(counts)
     total = float(sum(counts))
+    # Note tricky way to avoid 0*log(0)
     return -sum([k * math.log(k/total + (k==0)) for k in counts])
 
