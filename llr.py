@@ -34,6 +34,9 @@ def llr_root(k11, k12, k21, k22):
     sign = cmp(float(k11) / (k11 + k12), float(row) / total)
     return math.copysign(math.sqrt(llr_2x2(k11, k12, k21, k22)), sign)
 
+def cmp(a, b):
+    return (a > b) - (a < b)
+
 def flatten(list_of_lists):
     '''Iterates through the elements in a list of lists'''
     for xl in list_of_lists:
