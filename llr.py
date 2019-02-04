@@ -1,5 +1,7 @@
 from collections import Counter 
 import math
+from functools import reduce
+
 
 def llr(k):
     '''Computes an LLR score for a list of Count objects'''
@@ -32,10 +34,14 @@ def llr_root(k11, k12, k21, k22):
     row = k11 + k21
     total = (k11 + k12 + k21 + k22)
     sign = cmp(float(k11) / (k11 + k12), float(row) / total)
-    return math.copysign(math.sqrt(llr_2x2(k11, k12, k21, k22)), sign)
+    llr22 = llr_2x2(k11, k12, k21, k22)
+    if llr22 < 0: return 0.0
+    return math.copysign(math.sqrt(llr22), sign)
+
 
 def cmp(a, b):
-    return (a > b) - (a < b)
+    return int(a > b) - int(a < b)
+
 
 def flatten(list_of_lists):
     '''Iterates through the elements in a list of lists'''
