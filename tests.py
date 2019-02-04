@@ -21,10 +21,10 @@ def test_rowSums():
     s1 = 'abcabcabcababa'
     s2 = 'abcabcdef'
     s3 = 'defghijkabc'
-    assert llr.rowSums([]) == Counter().values()
-    assert llr.rowSums([Counter(s1)]) == Counter(s1).values()
-    assert llr.rowSums([Counter(s1), Counter(s2)]) == Counter(s1 + s2).values()
-    assert llr.rowSums([Counter(s1), Counter(s2), Counter(s3)]) == Counter(s1 + s2 + s3).values()
+    assert tuple(llr.rowSums([])) == tuple(Counter().values())
+    assert tuple(llr.rowSums([Counter(s1)])) == tuple(Counter(s1).values())
+    assert tuple(llr.rowSums([Counter(s1), Counter(s2)])) == tuple(Counter(s1 + s2).values())
+    assert tuple(llr.rowSums([Counter(s1), Counter(s2), Counter(s3)])) == tuple(Counter(s1 + s2 + s3).values())
 
 def test_colSums():
     x = Counter('abcabcabcababa')
